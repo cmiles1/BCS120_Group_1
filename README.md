@@ -6,7 +6,7 @@ This repository contains a group project for a sample electronic technology reta
 
 ## Program Files
 
-#### main.cpp
+#### Best Stop.cpp
 
     The main C++ program for the company's inventory management system.
     
