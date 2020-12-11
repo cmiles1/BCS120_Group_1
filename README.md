@@ -5,12 +5,12 @@
 This repository contains a group project for an inventory management system, designed for a sample electronic technology retail company, known as "Best Stop".
 
 ### Collaborators:
-Christopher Miles
-Aniq Abid
-Kelvin Canales
-Matthew Ortega
+Christopher Miles  
+Aniq Abid  
+Kelvin Canales  
+Matthew Ortega  
 Kevin Romero  
-Luke Ziccardi
+Luke Ziccardi  
 
 
 ## Program Files
