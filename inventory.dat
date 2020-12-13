@@ -1,16 +1,15 @@
-#ITEM ID, ITEM TYPE, ITEM NAME, INVENTORY AMT, PRICE 
-0001,Consoles,PS5,1000,500
-0002,PS5 Games,Demon's Souls,100,70
-0003,PS5 Games,Spider-Man Miles Morales,100,50
-0004,Accessories,PS5 Dual Sense Wireless Controller,100,70
-0005,Accessories,PS5 Dual Sense Charging Station,100,70
-0006,Consoles,XBOX Series X,1000,500
-0007,Xbox Games,Halo Infinite,100,60
-0008,Xbox Games,Assasin's Creed: Valhalla,100,60
-0009,Accessories,Xbox Series X Wireless Controller,100,60
-0010,Accessories,Turtle Beach Stealth 600 Headset,100,100
-0011,Consoles,Nintendo Switch,1000,300
-0012,Switch Games,Legend of Zelda: Breath of the Wild,100,60
-0013,Switch Games,Super Smash Bros. Ultimate,100,60
-0014,Accessories,Switch Pro Controller,100,70
-0015,Accessories,Nintendo Switch Carrying Case,100,20
+0001,Consoles,PS5,1000,500.00
+0002,PS5 Games,Demon's Souls,100,70.00
+0003,PS5 Games,Spider-Man Miles Morales,100,50.00
+0004,Accessories,PS5 Dual Sense Wireless Controller,100,70.00
+0005,Accessories,PS5 Dual Sense Charging Station,100,70.00
+0006,Consoles,XBOX Series X,1000,500.00
+0007,Xbox Games,Halo Infinite,100,60.00
+0008,Xbox Games,Assasin's Creed: Valhalla,100,60.00
+0009,Accessories,Xbox Series X Wireless Controller,100,60.00
+0010,Accessories,Turtle Beach Stealth 600 Headset,100,100.00
+0011,Consoles,Nintendo Switch,1000,300.00
+0012,Switch Games,Legend of Zelda: Breath of the Wild,100,60.00
+0013,Switch Games,Super Smash Bros. Ultimate,100,60.00
+0014,Accessories,Switch Pro Controller,100,70.00
+0015,Accessories,Nintendo Switch Carrying Case,100,20.00
