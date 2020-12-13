@@ -26,7 +26,7 @@ using namespace std;
 struct StoreInfo { 
 	// Store information
 	string name;
-	int number = 0;
+	int storenumber = 0;
 	string address;
 	string town;
 	string state;
@@ -44,22 +44,36 @@ struct StoreInfo {
 } store;
 
 struct UserInfo {
-	// Unique user id, given real name, their username and (plaintext*) password
-	int userid = 0;
+	int userid = 0; // Unique user id
 	string employeename;
 	string username;
 	string password;
 } seluser;
+
+struct InventoryData {
+	int itemSKU = 0;
+	string itemtype;
+	string itemname;
+	int numInStock = 0;
+	float price = 0.00f;
+};
+
 // **** End of Structure Prototypes ****
 
+
 // **** Function Prototypes ****
+int main();
 void loadStoreInfo(StoreInfo* store);
 void login(UserInfo* seluser);
+void loadInventory(int index_arr[], int SKU_arr[], string type_arr[], string name_arr[], int numInStock_arr[], float price_arr[], int arrsize);
+void displayInventory(int SKU_arr[], string type_arr[], string name_arr[], int numInStock_arr[], float price_arr[], int arrsize, int rangemin, int rangemax);
+
 
 // **** End of Function Prototypes ****
 
 
 int main() {
+
 	// Read in Store Info data
 	StoreInfo store;
 	loadStoreInfo(&store);
@@ -67,15 +81,15 @@ int main() {
 	// Welcome the customer
 	cout << "********************************************************************************" << endl;
 	cout << "Welcome to the " << store.name << " Inventory Management System!" << endl << endl;
-	cout << "\tWe are located at:\n\t\t" << store.address << ", " << store.town << ", " << store.state << " " << store.zip << endl << endl;
-	cout << "\tOur phone number is: \n\t\t" << store.phone << endl << endl;
+	cout << "\tWe are located at:" << endl << "\t\t" << store.address << ", " << store.town << ", " << store.state << " " << store.zip << endl << endl;
+	cout << "\tOur phone number is:  " << endl << "\t\t" << store.phone << endl << endl;
 
-	cout << "\tManager: \n\t\t" << store.manager << endl << "\t\tID: " << store.managerID << "\n\t\tExt: " << store.managerExt << endl << "\t\tEmail: " << store.managerEmail << endl << endl;
-	cout << "\tSystem Admin:\n\t\t" << store.sysadmin << "\n\t\tEmail: " << store.sysadminEmail << endl << endl;
+	cout << "\tManager: " << endl << "\t\t" << store.manager << endl << "\t\tID: " << store.managerID << endl << "\t\tExt: " << store.managerExt << endl << "\t\tEmail: " << store.managerEmail << endl << endl;
+	cout << "\tSystem Admin:" << endl << "\t\t" << store.sysadmin << endl << "\t\tEmail: " << store.sysadminEmail << endl << endl;
 	cout << "********************************************************************************" << endl;
 
 	// Prompt authentication and read in users datafile
-	cout << "Please authenticate before continuing\n\n";
+	cout << "Please authenticate before continuing" << endl << endl;
 	UserInfo seluser;
 	login(&seluser);
 	// User is authenticated
@@ -90,11 +104,48 @@ int main() {
 		privlev = 2;
 	}
 
+	const int arrsize = 15;
+	//InventoryData items[inv_size];
+
+	// Initialize the inventory in parallel arrays
+	int SKU_arr[arrsize] = { 0 };
+	string type_arr[arrsize];
+	string name_arr[arrsize];
+	int numInStock_arr[arrsize] = { 0 };
+	float price_arr[arrsize] = { 0.00f };
+	int index_arr[arrsize] = { 0 };
+
+	// Load our inventory into parallel arrays
+	loadInventory(index_arr, SKU_arr, type_arr, name_arr, numInStock_arr, price_arr, arrsize);
+
+
+	//*******************************
+	//_____ WIP _____
+
+
+	// Load parallel arrays into structure
+
+
+	// Bring the user into a menu
+	
+	// Loop through menu
+
+	// IF user selects to display menu
+
+	// Display the inventory data
+	// Set target lines minimum-maximum range to output
+	int rangemin = 0; // set to sku index range?
+	int rangemax = arrsize;
+
+	// Allow custom ranges
+
+	displayInventory(SKU_arr, type_arr, name_arr, numInStock_arr, price_arr, arrsize, rangemin, rangemax);
+	
+	
+
 	//*******************************
 	//_____ Suggestions / TODO _____
-	
-	//void loadInventory();
-		// Load the inventory database file
+
 	//.... getsystemDate() function -- used for log output
 
 	// Menu function (main menu loop)
@@ -111,6 +162,9 @@ int main() {
 	//*******************************
 }
 
+
+
+
 //************************STOREINFO FILE INPUT FUNCTION********************************//
 void loadStoreInfo(StoreInfo* store)
 {
@@ -122,7 +176,7 @@ void loadStoreInfo(StoreInfo* store)
 
 	// Quit if the file cannot be parsed
 	if (storeFile.fail()) {
-		cout << "\aFatal Error, could not load store info!\nPlease contact your system administrator.\n";
+		cout << "\aFatal Error, could not load store info!" << endl << "Please contact your system administrator." << endl;
 		exit(0);
 	}
 
@@ -153,7 +207,7 @@ void loadStoreInfo(StoreInfo* store)
 
 	// Load store's info into structure values to reflect the given input file
 	store->name = storename;
-	store->number = stoi(storenumber);
+	store->storenumber = stoi(storenumber);
 	store->address = storeaddress;
 	store->town = storetown;
 	store->state = storestate;
@@ -166,9 +220,9 @@ void loadStoreInfo(StoreInfo* store)
 	store->sysadmin = sysadmin;
 	store->sysadminEmail = sysadminEmail;
 
-	// Gracefully exit the file
+	// Close the file
 	storeFile.close();
-	cout << "\nStore information loaded!\n\n";
+	cout << "Store information loaded!" << endl << endl;
 
 }
 //************************END OF STOREINFO FILE INPUT FUNCTION********************************//
@@ -180,28 +234,27 @@ void login(UserInfo* seluser)
 	// Take a user's login info from standard input
 	string cinUser, cinPW;
 	char validPW = 'n';
-	char c; // keeps track of entered character
 	do {
-		cout << "\tEnter your username :\n\t"; // indent the columns to make it easier to read
+		cout << "\tEnter your username :" << endl << "\t"; // indent the columns to make it easier to read
 		cin >> cinUser;
-		cout << "\tEnter your password :\n\t";
+		cout << "\tEnter your password :" << endl << "\t";
 		cin >> cinPW;
-		cout << "\n\tIs the above information correct? (Y/N)" << endl << "\t";
+		cout << endl << "\tIs the above information correct? (Y/N)" << endl << "\t";
 		cin >> validPW;
 	} while (validPW == 'n' || validPW == 'N');
 	// **** END OF USER INPUT ****
 
 
 	//	**** FILE INPUT	****
-	ifstream dbFile;
+	ifstream usersFile;
 	//opens the stored user credentials file in read mode
-	dbFile.open("users.dat");
-	cout << "********************************************************************************\n";
+	usersFile.open("users.dat");
+	cout << "********************************************************************************" << endl;
 	cout << "Checking user information..." << endl;
 
 	// Check if the file can be opened
-	if (dbFile.fail()) {
-		cout << "\aFatal Error, could not find account info from file!\nPlease contact your system administrator.\n";
+	if (usersFile.fail()) {
+		cout << "\aFatal Error, could not find account info from file!" << endl << "Please contact your system administrator." << endl;
 		exit(0);
 	}
 
@@ -210,12 +263,12 @@ void login(UserInfo* seluser)
 
 	bool userauth = 0; // bool to keep track of if the user is authenticated or not
 	// Check username-password combos from file input - stop parsing and return current line if data matches input
-	while (!dbFile.eof())
+	while (!usersFile.eof())
 	{
-		getline(dbFile, userid, ',');
-		getline(dbFile, employeename, ',');
-		getline(dbFile, username, ',');
-		getline(dbFile, password, '\n');
+		getline(usersFile, userid, ',');
+		getline(usersFile, employeename, ',');
+		getline(usersFile, username, ',');
+		getline(usersFile, password, '\n');
 
 		if ( (username == cinUser) && (password == cinPW) ) {
 			// Load selected user's info into structure values to reflect the given input file
@@ -229,8 +282,8 @@ void login(UserInfo* seluser)
 			break; // stop parsing if user is logged in
 		}
 	}
-	// Gracefully exit the file
-	dbFile.close();
+	// Close the file
+	usersFile.close();
 	//	**** END OF FILE INPUT ****
 
 
@@ -238,11 +291,83 @@ void login(UserInfo* seluser)
 	if (userauth == 0) {
 		// Play an audible alert tone to spook- I mean- alert the exiting user
 		cout << "\a";
-		cout << "\tSorry, your account credentials could not be verified.\n\tProgram exiting...\n\n\n";
+		cout << "\tSorry, your account credentials could not be verified." << endl << "\tProgram exiting...\n\n\n";
 		exit(0);
 	}
 	else {
-		cout << "\tCredentials Verified!\n";
+		cout << "\tCredentials Verified!" << endl;
 	}
 }
 //*************************END OF USER AUTHENTICATION FUNCTION********************************//
+
+
+//************************INVENTORY FILE INPUT FUNCTION********************************//
+void loadInventory(int index_arr[], int SKU_arr[], string type_arr[], string name_arr[], int numInStock_arr[], float price_arr[], int arrsize)
+{
+	ifstream inventoryFile;
+	//open a file in read mode
+	inventoryFile.open("inventory.dat");
+
+	cout << "Reading inventory..." << endl;
+
+	// Quit if the file cannot be parsed
+	if (inventoryFile.fail()) {
+		cout << "\aFatal Error, could not load inventory!" << endl << "Please contact your system administrator." << endl;
+		exit(0);
+	}
+
+	//bring the data in as strings to avoid an abnormal end
+	string itemSKU = "", itemtype = "", itemname = "", numInStock = "", price = "";
+
+	int n = 0; //line index of the file
+
+	//loop through the file to get the single-record
+	while (!inventoryFile.eof())
+	{
+		getline(inventoryFile, itemSKU, ',');
+		getline(inventoryFile, itemtype, ',');
+		getline(inventoryFile, itemname, ',');
+		getline(inventoryFile, numInStock, ',');
+		getline(inventoryFile, price, '\n');
+
+		// If we are not out of the parallel array index range and there's data on the line
+		if ((n < arrsize) && (itemSKU != "")) {
+			// Load inventory system info into structure values to reflect the given input file
+			SKU_arr[n] = stoi(itemSKU);
+			type_arr[n] = itemtype;
+			name_arr[n] = itemname;
+			numInStock_arr[n] = stoi(numInStock);
+			price_arr[n] = stof(price);
+		}
+		else {
+			// IN CASE our constant size of our array goes out-of-bounds,
+			// If there's data on the line,  inform the user there's potential data loss in the file
+			if (itemSKU != "") {
+				cout << "[!]\t<line omitted error>\t Item SKU: " << itemSKU << "\t...\t <- Potential loss of data on line " << n << endl;
+			}
+		}
+
+		// Go to next line / next inventory item
+		n++;
+	}
+
+	// Close the file
+	inventoryFile.close();
+	cout << "Inventory loaded!" << endl << endl;
+
+}
+//************************END OF INVENTORY FILE INPUT FUNCTION********************************//
+
+
+
+//************************DISPLAY DATA FUNCTION********************************//
+void displayInventory(int SKU_arr[], string type_arr[], string name_arr[], int numInStock_arr[], float price_arr[], int arrsize, int rangemin, int rangemax) {
+	cout << "______________________________________________________________________________________________" << endl;
+	cout << "SKU\tCategory\tItem Name\n #\tNumber in Stock\t  Price" << endl;
+	for (unsigned int n = 0; n < arrsize;) {
+		cout << "______________________________________________________________________________________________" << endl;
+		cout << " " << SKU_arr[n] << "\t" << type_arr[n] << "\t" << name_arr[n] << "\n  \tStock: " << numInStock_arr[n] << "\tPrice: $" << price_arr[n] << endl;
+		n++;
+	}
+}
+//************************END OF DISPLAY DATA FUNCTION********************************//

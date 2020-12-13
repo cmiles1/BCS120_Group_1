@@ -1,15 +1,15 @@
-0001,Consoles,PS5,1000,500.00
-0002,PS5 Games,Demon's Souls,100,70.00
-0003,PS5 Games,Spider-Man Miles Morales,100,50.00
-0004,Accessories,PS5 Dual Sense Wireless Controller,100,70.00
-0005,Accessories,PS5 Dual Sense Charging Station,100,70.00
-0006,Consoles,XBOX Series X,1000,500.00
-0007,Xbox Games,Halo Infinite,100,60.00
-0008,Xbox Games,Assasin's Creed: Valhalla,100,60.00
-0009,Accessories,Xbox Series X Wireless Controller,100,60.00
-0010,Accessories,Turtle Beach Stealth 600 Headset,100,100.00
-0011,Consoles,Nintendo Switch,1000,300.00
-0012,Switch Games,Legend of Zelda: Breath of the Wild,100,60.00
-0013,Switch Games,Super Smash Bros. Ultimate,100,60.00
-0014,Accessories,Switch Pro Controller,100,70.00
-0015,Accessories,Nintendo Switch Carrying Case,100,20.00
+1,Consoles,Playstation 5,61,500.00
+2,PS5 Games,Demon's Souls,41,70.00
+3,PS5 Games,Spider-Man Miles Morales,23,50.00
+4,Accessories,PS5 Dual Sense Wireless Controller,70,70.00
+5,Accessories,PS5 Dual Sense Charging Station,70,70.00
+6,Consoles,XBOX Series X,56,500.00
+7,Xbox Games,Halo Infinite,45,60.00
+8,Xbox Games,Assasin's Creed: Valhalla,32,60.00
+9,Accessories,Xbox Series X Wireless Controller,54,60.00
+10,Accessories,Turtle Beach Stealth 600 Headset,25,100.00
+11,Consoles,Nintendo Switch,57,300.00
+12,Switch Games,Legend of Zelda: Breath of the Wild,45,60.00
+13,Switch Games,Super Smash Bros. Ultimate,25,60.00
+14,Accessories,Switch Pro Controller,52,70.00
+15,Accessories,Nintendo Switch Carrying Case,57,20.00
