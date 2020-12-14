@@ -1,4 +1,4 @@
-USERID, REAL NAME, USERNAME, PASSWORD
+USERID, REAL NAME, USERNAME, PASSWORD 
 0,Root,root,toor
 1,Benjamin Franklin,bfrank,password
 2,Mahatma Ghandi,mghandi,Pa$$w0rd!
