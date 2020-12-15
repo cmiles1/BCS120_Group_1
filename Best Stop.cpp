@@ -998,7 +998,6 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 
 
 		// APPLY APPENDED CHANGES TO FILE
-		cout << "SAVE CHANGES : " << saveChanges;
 		if (saveChanges == 1) {
 			do {
 				// APPLY CHANGES IN PROGRAM MEMORY
@@ -1020,7 +1019,7 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 			} while ((!writeSuccess) && (!discardChanges)); // Do not allow user to break from loop until changes discarded or write success
 		}
 		else {
-			cout << endl << "\t Changes discarded!" << endl;
+			cout << endl << "\t Above changes discarded!" << endl;
 		}
 		// ** END OF WRITE CHANGES TO FILE **
 
