@@ -149,7 +149,7 @@ int main() {
 	// END OF PRIVILEGE LEVEL ASSIGNMENT
 
 	// Set max size of items in datafile
-	unsigned const int InvSize = 20;
+	unsigned const int InvSize = 25;
 
 	//InventoryData items[inv_size];
 
@@ -710,7 +710,7 @@ void display_byType(vector<InventoryData> &items, unsigned int InvSize, string c
 	}
 	unsigned int selcatnum = 0;
 	do {
-		cout << endl << endl << "\t\t > ";
+		cout << endl << "\t\t > ";
 		cin >> selcatnum;
 
 		if ((selcatnum < 1) || (selcatnum > index)) {
@@ -841,7 +841,8 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 			if (selCategory[0] == '1') {
 				if (seluser->privlev >= 1) { // Checks user privileges -- See definition 
 					cout << "\tEnter the new item name" << endl << "\t> ";
-					cin >> newName;
+					cin.ignore();
+					getline(cin, newName);
 				}
 				else {
 					cout << "\a\tError : Unauthorized command!" << endl;
@@ -868,7 +869,8 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 			else if (selCategory[0] == '3') {
 				if (seluser->privlev >= 1) { // Checks user privileges
 					cout << "\tEnter the new category" << endl << "\t> ";
-					cin >> newType;
+					cin.ignore();
+					getline(cin, newType);
 				}
 				else {
 					cout << endl << "\a\tError : Unauthorized command!" << endl;
@@ -972,7 +974,7 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 			}
 
 
-			// Display appended item information after changes made - top of the loop
+			// Display appended item information before changes wrote
 			if (newName != "") {
 				cout << endl << "ITEM INFORMATION :" << endl;
 				cout << "______________________________________________________________________________________________" << endl; // Start of table
@@ -994,12 +996,14 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 		// Keep track of if the file can be written
 		bool writeSuccess = 0;
 
-		// APPLY CHANGES IN PROGRAM
-		items[selindex] = { newSKU, newType, newName, newAmtInStock, newPrice };
 
 		// APPLY APPENDED CHANGES TO FILE
+		cout << "SAVE CHANGES : " << saveChanges;
 		if (saveChanges == 1) {
 			do {
+				// APPLY CHANGES IN PROGRAM MEMORY
+				items[selindex] = { newSKU, newType, newName, newAmtInStock, newPrice };
+
 				// WRITE CHANGES TO FILE
 				writeSuccess = writechanges(seluser, items, InvSize, selindex);
 				if (!writeSuccess) {
@@ -1015,11 +1019,14 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 				}
 			} while ((!writeSuccess) && (!discardChanges)); // Do not allow user to break from loop until changes discarded or write success
 		}
+		else {
+			cout << endl << "\t Changes discarded!" << endl;
+		}
 		// ** END OF WRITE CHANGES TO FILE **
 
 		// ** EDIT NEW ITEM SELECTION **
 		// Ask if user wishes to edit another item by SKU
-		cout << endl << "\tDo you wish to edit another inventory item? (Y/N)" << endl << "\t >";
+		cout << endl << "\tDo you wish to edit another inventory item? (Y/N)" << endl << "\t> ";
 		string editMoreItems;
 		cin >> editMoreItems;
 
