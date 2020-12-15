@@ -43,7 +43,7 @@ Input file containing all inventory data
 
 #### users.dat
 
- Input file containing all of the employee information and (plaintext) credentials in the specified format:
+ Input file containing all of the employee information and (plaintext) credentials in the specified format: \
 `(Delimiter: ",")`\
 `	 - User ID Number`\
 `	 - Employee Real Name`\
