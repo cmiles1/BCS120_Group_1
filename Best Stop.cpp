@@ -1156,7 +1156,7 @@ MESSAGE TYPES	MSG CODE	MSG NAME		USERNAME	MSG INFO 															|   Descriptio
 	INFO		I5001		AUTH_LOGIN 		USER		User login successful												|	-- user successful login
 																															| * user tried doing something they're not allowed to do, warn *
 	WARN		W6001		FAILED_LOGIN	<ACCOUNT>	User login unsuccessful												|	-- user unsuccessful login attempt, <ACCOUNT> is the username credentials the user tried to use
-	WARN		W6002		UNAUTH_PRIV		USER		User with priv <privlev> attempted to change SKU <SKU>(...)		 	|	-- user unsucessfully tried to change an item <SKU> number without correct privilege level
+	WARN		W6002		UNAUTH_PRIV		USER		User with priv <privlev> attempted to change SKU <SKU>(...)		 	|	-- user unsuccessfully tried to change an item <SKU> number without correct privilege level
 
 
 	// No log file I/O error listed, (<-- because how would we be able to write it the log file!)
