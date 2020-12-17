@@ -854,7 +854,7 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 
 			// USER CHANGES ITEM SKU
 			else if (selCategory[0] == '2') {
-				if (seluser->privlev >= 1) { // Checks user privileges
+				if (seluser->privlev >= 2) { // Checks user privileges
 					cout << "\tEnter the new item SKU" << endl << "\t> ";
 					cin >> newSKU;
 				}
@@ -901,20 +901,20 @@ void edit_inventoryData(vector<InventoryData> &items, UserInfo* seluser, unsigne
 					if (newPrice <= 0.00) {
 						cout << "\a\tError : Item cost cannot be negative or 0!" << endl;
 						newPrice = items[selindex].price; // re-initialize the newPrice
-						string warnMsg = "User with privilege level " + to_string(seluser->privlev) + "attempted to change SKU " + to_string(items[selindex].itemSKU) + " price to a bad value";
+						string warnMsg = "User with privilege level " + to_string(seluser->privlev) + " attempted to change SKU " + to_string(items[selindex].itemSKU) + " price to a bad value";
 						appendLogFile("WARN", "W6002", "UNAUTH_PRIV", seluser->username, warnMsg);
 					}
 				}
 				else {
 					cout << endl << "\a\tError : Unauthorized command!" << endl;
-					string warnMsg = "User with privilege level " + to_string(seluser->privlev) + "attempted to change SKU " + to_string(items[selindex].itemSKU) + " price";
+					string warnMsg = "User with privilege level " + to_string(seluser->privlev) + " attempted to change SKU " + to_string(items[selindex].itemSKU) + " price";
 					appendLogFile("WARN", "W6002", "UNAUTH_PRIV", seluser->username, warnMsg);
 				}
 			}
 
 			// USER DELETES ITEM
 			else if (selCategory[0] == '6') {
-				if (seluser->privlev > -2) { // Checks user privileges -- Only allow managers+ to delete item
+				if (seluser->privlev >= 2) { // Checks user privileges -- Only allow managers+ to delete item
 
 					// Confirm deletion
 					string confirmDelete;
@@ -1158,9 +1158,10 @@ MESSAGE TYPES	MSG CODE	MSG NAME		USERNAME	MSG INFO 															|   Descriptio
 	WARN		W6001		FAILED_LOGIN	<ACCOUNT>	User login unsuccessful												|	-- user unsuccessful login attempt, <ACCOUNT> is the username credentials the user tried to use
 	WARN		W6002		UNAUTH_PRIV		USER		User with priv <privlev> attempted to change SKU <SKU>(...)		 	|	-- user unsucessfully tried to change an item <SKU> number without correct privilege level
 
-	// No log file I/O error listed, (<--because how would we be able to write it the log file!)
+
+	// No log file I/O error listed, (<-- because how would we be able to write it the log file!)
 	// <ACCOUNT> is ambigous, it does NOT mean the user credentials have been verified
-	// LOCAL SYSTEM TIME is also output to the first column of the log file
+	// LOCAL SYSTEM TIME is the output to the first column of the log file
 
 	****************************************************************************************************************************************************************************************
 */
