@@ -116,7 +116,7 @@ Main datafile for input and output. Inventory items are stored in this specific 
 `	 - Password (*plaintext)`\
 `  - Privilege Level` (*see "Privilege Levels"*).
 
-Whereas the first employee is the Root account, the second is the Manager, and the third is the System Administator's personal account. \
+Whereas the first employee is the Root account, the second is the Manager, and the third is the System Administator's personal account.
 
 #### storeInfo.dat
 
@@ -138,11 +138,12 @@ Input file containing store information in this specific format:\
 
 #### log.dat
 
-Output file containing log information in this specific format (*see "Log Messages"*):\
-`  - (Delimiter: ",")`\
-`  - Time`  (Format : `Mon DD YYYY HH:MM:SS`) (System time- *locally-generated*)
-`  - Message Type`\
-`  - Message/Error Code`\ 
+Output file containing log information in this specific format (*see "Log Messages"*): \
+
+`  - (Delimiter: ",")` \
+`  - Time`  (Format : `Mon DD YYYY HH:MM:SS`) (System time- *locally-generated*) \
+`  - Message Type` \
+`  - Message/Error Code` \
 `  - Message/Error` \
 `  - User/Account `\
 `	 - Message Info`
