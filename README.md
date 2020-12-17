@@ -79,8 +79,7 @@ Appends given information in a specific format to the output log file. \
 
 ##### Inventory Editing Function
 --- `void edit_inventoryData(...);`
-Allows user to search for an inventory item by SKU (and displays it via `displayInventory`).\
-(Note : Does not use `display_bySKU()`) \
+Allows user to search for an inventory item by SKU (and displays it via `displayInventory`). (Note : Does not use `display_bySKU()`) \
 Allows the user (granted they have the right privilege-level assignment value- (*see "Privilege Levels"*))- to change information about each `InventoryData{}` item (*see "Data Files" for the list of information that may be changed*). \
 Writes unauthorized item changes to the output log file. \
 Allows users with `Privilege 1` to delete items. \
